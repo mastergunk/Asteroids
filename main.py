@@ -4,6 +4,8 @@
 import pygame
 from constants import *
 from player import Player
+from asteroids import Asteroid
+from asteroidfield import AsteroidField
 #from player import Player2
 
 
@@ -21,10 +23,15 @@ def main():
 	
 	updatable = pygame.sprite.Group()
 	drawable = pygame.sprite.Group()
+	asteroids = pygame.sprite.Group()
+	
 
 	#Player2.containers = (updatable, drawable)
 	Player.containers = (updatable, drawable)
+	Asteroid.containers = (asteroids, updatable, drawable)
+	AsteroidField.containers = (updatable)
 	ship = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2)) # Object is used via groups
+	space = AsteroidField()
 	#ship2 = Player2((SCREEN_WIDTH /3), (SCREEN_HEIGHT / 3))
 	while True:
 		for event in pygame.event.get():
@@ -35,8 +42,8 @@ def main():
 
 		updatable.update(dt)
 		
-		for drawabales in drawable:
-			drawabales.draw(screen)
+		for drawbales in drawable:
+			drawbales.draw(screen)
 
 		pygame.display.flip()
 		frames_per_second.tick(60)
