@@ -7,7 +7,8 @@ from player import Player
 from asteroids import Asteroid
 from asteroidfield import AsteroidField
 import sys
-#from player import Player2
+from shot import Shot
+
 
 
 
@@ -25,15 +26,17 @@ def main():
 	updatable = pygame.sprite.Group()
 	drawable = pygame.sprite.Group()
 	asteroids = pygame.sprite.Group()
+	shots = pygame.sprite.Group()
 	
 
-	#Player2.containers = (updatable, drawable)
+	
 	Player.containers = (updatable, drawable)
 	Asteroid.containers = (asteroids, updatable, drawable)
 	AsteroidField.containers = (updatable)
+	Shot.containers = (updatable, drawable, shots)
 	ship = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2)) # Object is used via groups
 	space = AsteroidField()
-	#ship2 = Player2((SCREEN_WIDTH /3), (SCREEN_HEIGHT / 3))
+	
 	while True:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -43,6 +46,7 @@ def main():
 
 		updatable.update(dt)
 
+	
 		for asteroid in asteroids:
 			if not asteroid.collision(ship):
 				print("Game over!")
@@ -51,6 +55,9 @@ def main():
 			
 		for drawbales in drawable:
 			drawbales.draw(screen)
+
+		if pygame.key.get_pressed()[pygame.K_SPACE]:
+			ship.shoot(shots)	
 
 		pygame.display.flip()
 		frames_per_second.tick(60)
