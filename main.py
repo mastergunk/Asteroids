@@ -56,7 +56,8 @@ def main():
 		for drawbales in drawable:
 			drawbales.draw(screen)
 
-		if pygame.key.get_pressed()[pygame.K_SPACE]:
+		keys = pygame.key.get_pressed()
+		if keys[pygame.K_SPACE]:
 			ship.shoot(shots)	
 
 		pygame.display.flip()
