@@ -45,7 +45,7 @@ def main():
 		screen.fill("black")
 
 		updatable.update(dt)
-
+		
 	
 		for asteroid in asteroids:
 			if not asteroid.collision(ship):
@@ -57,8 +57,10 @@ def main():
 			drawbales.draw(screen)
 
 		keys = pygame.key.get_pressed()
-		if keys[pygame.K_SPACE]:
-			ship.shoot(shots)	
+
+		if keys[pygame.K_SPACE] and ship.timer <= 0:
+			ship.shoot(shots)
+			ship.timer = PLAYER_SHOOT_COOLDOWN
 
 		pygame.display.flip()
 		frames_per_second.tick(60)
