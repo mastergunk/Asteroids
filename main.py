@@ -51,6 +51,11 @@ def main():
 			if not asteroid.collision(ship):
 				print("Game over!")
 				sys.exit(1)
+			for shot in shots:
+				if not asteroid.collision(shot):
+					asteroid.kill()
+					shot.kill()		
+
 
 			
 		for drawbales in drawable:
