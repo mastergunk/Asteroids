@@ -53,7 +53,7 @@ def main():
 				sys.exit(1)
 			for shot in shots:
 				if not asteroid.collision(shot):
-					asteroid.kill()
+					asteroid.split()
 					shot.kill()		
 
 
